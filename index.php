@@ -12,7 +12,6 @@
  */
 get_header();
 ?>
-
 <div class="container">
     <div class="row">
         <div class="col-md-8">
@@ -31,8 +30,5 @@ get_header();
             <?php get_sidebar(); ?>
         </div>
     </div>
-
-
 </div><!-- /.container -->
-
 <?php get_footer(); ?>
