@@ -145,3 +145,7 @@ require get_template_directory() . '/inc/customizer.php';
  * Load Jetpack compatibility file.
  */
 require get_template_directory() . '/inc/jetpack.php';
+
+if (!class_exists("Banner_Widget")) {
+    require get_template_directory() . "/widgets/widget.banner.php";
+}
