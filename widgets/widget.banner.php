@@ -30,14 +30,18 @@ class Banner_Widget extends WP_Widget
     public function widget($args, $instance)
     {
         extract($args);
-        $title = apply_filters('widget_title', $instance['title']);
+        $title  = apply_filters('widget_title', $instance['title']);
+        $banner = apply_filters('widget_banner', $instance['banner']);
 
         echo $before_widget;
         if (!empty($title))
             echo $before_title . $title . $after_title;
-        ?>
-I am banner widget
+        $image_attributes = wp_get_attachment_image_src($banner);
+        if ($image_attributes) {
+            ?>
+            <img src="<?php echo $image_attributes[0]; ?>" width="<?php echo $image_attributes[1]; ?>" height="<?php echo $image_attributes[2]; ?>">
         <?php
+        }
         echo $after_widget;
 
     }
@@ -54,8 +58,8 @@ I am banner widget
      */
     public function update($new_instance, $old_instance)
     {
-        $instance          = array ();
-        $instance['title'] = strip_tags($new_instance['title']);
+        $instance           = array ();
+        $instance['title']  = strip_tags($new_instance['title']);
         $instance['banner'] = strip_tags($new_instance['banner']);
 
         return $instance;
@@ -71,7 +75,7 @@ I am banner widget
      */
     public function form($instance)
     {
-        $title = __('New title', 'text_domain');
+        $title  = __('New title', 'text_domain');
         $banner = 'Select an image id';
         if (isset($instance['title'])) {
             $title = $instance['title'];
